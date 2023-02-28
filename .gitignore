@@ -1,0 +1,10 @@
+﻿################################################################################
+# Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
+################################################################################
+
+/NotesPlatform/.vs
+/NotesPlatform/Microservices/Notes/NotesApi/obj
+/NotesPlatform/Microservices/Notes/NotesApplication/obj
+/NotesPlatform/Microservices/Notes/NotesDomain/obj
+/NotesPlatform/Microservices/Notes/NotesPersistence/obj
+/NotesPlatform/PublicApi/obj

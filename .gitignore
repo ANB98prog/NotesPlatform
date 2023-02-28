@@ -8,3 +8,7 @@
 /NotesPlatform/Microservices/Notes/NotesDomain/obj
 /NotesPlatform/Microservices/Notes/NotesPersistence/obj
 /NotesPlatform/PublicApi/obj
+/NotesPlatform/Microservices/Notes/NotesApi/bin/
+/NotesPlatform/Microservices/Notes/NotesDomain/bin/Debug/net6.0
+/NotesPlatform/Microservices/Notes/NotesApplication/bin/Debug/net6.0
+/NotesPlatform/Microservices/Notes/NotesPersistence/bin/Debug/net6.0

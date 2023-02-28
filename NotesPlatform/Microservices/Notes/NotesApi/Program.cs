@@ -1,3 +1,5 @@
+using NotesPersistence;
+
 namespace NotesApi
 {
     public class Program
@@ -12,6 +14,14 @@ namespace NotesApi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddPersistence(builder.Configuration);
+
+            using (var serviceProvider = builder.Services.BuildServiceProvider())
+            {
+                var context = serviceProvider.GetRequiredService<NotesDbContext>();
+                DbInitializer.Initialize(context);
+            }
 
             var app = builder.Build();
 

@@ -11,10 +11,11 @@ namespace NotesPersistence
            IConfiguration configuration)
         {
             var connectionString = configuration["DbConnection"];
-            services.AddDbContext<NotesDbContext>(options =>
-            {
-                options.UseNpgsql(connectionString);
-            });
+            services.AddEntityFrameworkNpgsql()
+                .AddDbContext<NotesDbContext>(options =>
+                {
+                    options.UseNpgsql(connectionString);
+                });
 
             services.AddTransient<INotesDbContext>(s => s.GetRequiredService<NotesDbContext>());
 

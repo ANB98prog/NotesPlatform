@@ -16,7 +16,7 @@ namespace NotesPersistence.EntityTypeConfigurations
             builder.Property(note => note.Title)
                 .HasMaxLength(250)
                     .IsRequired(false);
-            builder.Property(note => note.Text)
+            builder.Property(note => note.Content)
                 .HasMaxLength(1024)
                     .IsRequired(false);
         }

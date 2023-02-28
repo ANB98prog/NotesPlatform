@@ -19,9 +19,9 @@ namespace NotesDomain
         public string? Title { get; set; }
 
         /// <summary>
-        /// Note text
+        /// Note content
         /// </summary>
-        public string? Text { get; set; }
+        public string? Content { get; set; }
 
         /// <summary>
         /// Creation date
@@ -32,5 +32,12 @@ namespace NotesDomain
         /// Edit date
         /// </summary>
         public DateTime? EditDate { get; set; }
+
+        public Note(string? title, string? content)
+        {
+            Title = title;
+            Content = content;
+            CreationDate = DateTime.UtcNow;
+        }
     }
 }

@@ -24,7 +24,7 @@ services:
   notes:
     container_name: NotesApi
     build:
-      context: Microservices\Notes
+      context: Microservices/Notes
       dockerfile: Dockerfile
     depends_on:
       - postgress

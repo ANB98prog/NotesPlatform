@@ -31,7 +31,7 @@ services:
     ports:
       - "5222:80"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Staging
 
 volumes:
   db-data:

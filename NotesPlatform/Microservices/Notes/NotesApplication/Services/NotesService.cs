@@ -144,15 +144,8 @@ namespace NotesApplication.Services
                     throw new NotFoundException(nameof(Note), id);
                 }
 
-                if (!note.Title?.Equals(title) ?? false)
-                {
-                    note.Title = title;
-                }
-                if (!note.Title?.Equals(title) ?? false)
-                {
-                    note.Title = title;
-                }
-
+                note.Title = title;
+                note.Content = content;
                 note.EditDate = DateTime.UtcNow;
 
                 _notes.Notes.Update(note);

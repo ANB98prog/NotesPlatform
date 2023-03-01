@@ -48,6 +48,23 @@ namespace NotesApi.Controllers
             }
         }
 
+        [HttpPatch]
+        public async Task<IActionResult> UpdateNoteAsync(Guid id, UpdateNoteModel note)
+        {
+            try
+            {
+                var (title, content) = note;
+                await _notesService.UpdateNoteAsync(id, title, content);
+
+                return NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(id);
+            }            
+        }
+             
+
         [HttpGet("list")]
         public async Task<IEnumerable<Note>> GetNotesList()
         {

@@ -5,7 +5,7 @@
     /// </summary>
     public record CreateNoteModel : NoteModel
     {
-        protected CreateNoteModel(NoteModel original) : base(original)
+        public CreateNoteModel(string? Title, string? Content) : base(Title, Content)
         {
         }
     }

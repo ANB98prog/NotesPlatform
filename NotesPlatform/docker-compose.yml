@@ -11,7 +11,6 @@ services:
       - POSTGRES_DB=notes
     volumes:
       - db-data:/var/lib/postgresql/data/
-      #- D:\Projects\Postgress\data:/var/lib/postgresql/data/
   # pgAdmin:
   #   container_name: pgadmin
   #   image: dpage/pgadmin4:latest
@@ -20,7 +19,7 @@ services:
   #   ports:
   #     - "82:80"
   #   environment:
-  #     - 'PGADMIN_DEFAULT_EMAIL=newman_98@mail.ru'
+  #     - 'PGADMIN_DEFAULT_EMAIL=admin@mail.ru'
   #     - 'PGADMIN_DEFAULT_PASSWORD=root'
   notes:
     container_name: NotesApi

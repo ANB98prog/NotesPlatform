@@ -1,4 +1,9 @@
+using Microsoft.Extensions.DependencyInjection;
+using NotesApi.Models;
+using NotesApplication.Interfaces;
+using NotesApplication.Services;
 using NotesPersistence;
+using System.Text.Json;
 
 namespace NotesApi
 {
@@ -22,6 +27,8 @@ namespace NotesApi
                 var context = serviceProvider.GetRequiredService<NotesDbContext>();
                 DbInitializer.Initialize(context);
             }
+
+            builder.Services.AddScoped<INotesService>(s => new NotesService(s.GetRequiredService<ILogger<Program>>(), s.GetRequiredService<INotesDbContext>()));
 
             var app = builder.Build();
 

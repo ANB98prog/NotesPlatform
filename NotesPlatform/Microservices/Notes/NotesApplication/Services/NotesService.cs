@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Exceptions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using NotesApplication.Exceptions;
 using NotesApplication.Interfaces;
 using NotesDomain;
 

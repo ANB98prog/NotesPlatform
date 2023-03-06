@@ -1,3 +1,4 @@
+using ApiExceptions.Middlewares;
 using Microsoft.Extensions.DependencyInjection;
 using NotesApi.Models;
 using NotesApplication.Interfaces;
@@ -40,7 +41,10 @@ namespace NotesApi
                 app.UseSwaggerUI();
             }
 
+            app.UseCustomExceptionHandler();
+
             app.UseAuthorization();
+
 
 
             app.MapControllers();

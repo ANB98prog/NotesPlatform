@@ -1,4 +1,4 @@
-﻿namespace NotesApplication.Exceptions
+﻿namespace ApiExceptions
 {
     /// <summary>
     /// Not found exceptions
@@ -11,7 +11,7 @@
         /// <param name="name">Entity name</param>
         /// <param name="key">Entity key</param>
         public NotFoundException(string name, object key) :
-            base($"Note \"{name}\" ({key}) not found.")
+            base($"Item \"{name}\" ({key}) not found.")
         { }
     }
 }

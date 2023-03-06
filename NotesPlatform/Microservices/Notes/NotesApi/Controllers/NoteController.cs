@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NotesApi.Models;
-using NotesApplication.Exceptions;
 using NotesApplication.Interfaces;
 using NotesDomain;
 
@@ -30,40 +29,23 @@ namespace NotesApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<bool> DeleteNoteByIdAsync(Guid id)
+        public async Task<IActionResult> DeleteNoteByIdAsync(Guid id)
         {
-            try
-            {
-                await _notesService.DeleteNoteAsync(id);
+            await _notesService.DeleteNoteAsync(id);
 
-                return true;
-            }
-            catch (NotFoundException ex)
-            {
-                return false;
-            }
-            catch(Exception ex)
-            {
-                return false;
-            }
+            return NoContent();
         }
 
         [HttpPatch]
         public async Task<IActionResult> UpdateNoteAsync(Guid id, UpdateNoteModel note)
         {
-            try
-            {
-                var (title, content) = note;
-                await _notesService.UpdateNoteAsync(id, title, content);
+            var (title, content) = note;
+            await _notesService.UpdateNoteAsync(id, title, content);
 
-                return NoContent();
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(id);
-            }            
+            return NoContent();
+
         }
-             
+
 
         [HttpGet("list")]
         public async Task<IEnumerable<Note>> GetNotesList()

@@ -1,4 +1,4 @@
-﻿using Exceptions;
+﻿using ApiExceptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NotesApplication.Interfaces;

@@ -1,6 +1,6 @@
 ﻿using ApiExceptions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using NotesApplication.Interfaces;
 using NotesDomain;
 
@@ -37,20 +37,20 @@ namespace NotesApplication.Services
         {
             try
             {
-                _logger.LogInformation("Try to create new note.");
+                _logger.Information("Try to create new note.");
 
                 var note = new Note(title, content);
 
                 await _notes.Notes.AddAsync(note);
                 await _notes.SaveChangesAsync(CancellationToken.None);
 
-                _logger.LogInformation($"Note created: {title} with id: {note.Id}");
+                _logger.Information($"Note created: {title} with id: {note.Id}");
 
                 return note;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occured while note creation.");
+                _logger.Error(ex, "Error occured while note creation.");
                 throw;
             }
         }
@@ -60,7 +60,7 @@ namespace NotesApplication.Services
         {
             try
             {
-                _logger.LogInformation($"Try to delete note with id {id}.");
+                _logger.Information($"Try to delete note with id {id}.");
 
                 var note = await _notes.Notes
                     .FindAsync(new object[] { id });
@@ -73,12 +73,12 @@ namespace NotesApplication.Services
                 _notes.Notes.Remove(note);
                 await _notes.SaveChangesAsync(CancellationToken.None);
 
-                _logger.LogInformation($"Note deleted: {id}");
+                _logger.Information($"Note deleted: {id}");
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occured while note removing.");
+                _logger.Error(ex, "Error occured while note removing.");
                 throw;
             }
         }
@@ -87,18 +87,18 @@ namespace NotesApplication.Services
         {
             try
             {
-                _logger.LogInformation($"Try to get list notes.");
+                _logger.Information($"Try to get list notes.");
 
                 var notes = await _notes.Notes.ToListAsync();
 
-                _logger.LogInformation($"Notes successfully got. Count {notes.Count}");
+                _logger.Information($"Notes successfully got. Count {notes.Count}");
 
                 return notes;
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occured while get notes list.");
+                _logger.Error(ex, "Error occured while get notes list.");
                 throw;
             }
         }
@@ -107,7 +107,7 @@ namespace NotesApplication.Services
         {
             try
             {
-                _logger.LogInformation($"Try to get note by id {id}.");
+                _logger.Information($"Try to get note by id {id}.");
 
                 var note = await _notes.Notes
                     .FindAsync(new object[] { id });
@@ -117,14 +117,14 @@ namespace NotesApplication.Services
                     throw new NotFoundException(nameof(Note), id);
                 }
 
-                _logger.LogInformation($"Note successfully got.");
+                _logger.Information($"Note successfully got.");
 
                 return note;
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occured while getting note by id.");
+                _logger.Error(ex, "Error occured while getting note by id.");
                 throw;
             }
         }
@@ -134,7 +134,7 @@ namespace NotesApplication.Services
         {
             try
             {
-                _logger.LogInformation("Try to update existing note.");
+                _logger.Information("Try to update existing note.");
 
                 var note = await _notes.Notes
                     .FindAsync(new object[] { id });
@@ -151,13 +151,13 @@ namespace NotesApplication.Services
                 _notes.Notes.Update(note);
                 await _notes.SaveChangesAsync(CancellationToken.None);
 
-                _logger.LogInformation($"Note updated {note.Id}");
+                _logger.Information($"Note updated {note.Id}");
 
                 return note;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occured while note updating.");
+                _logger.Error(ex, "Error occured while note updating.");
                 throw;
             }
         }

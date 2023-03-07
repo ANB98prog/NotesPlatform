@@ -16,6 +16,7 @@ namespace NotesApi
             // Add services to the container.
             ConfigureAppServices(builder.Services, builder.Configuration);
 
+            builder.Services.AddRouting(options => options.LowercaseUrls = true);
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

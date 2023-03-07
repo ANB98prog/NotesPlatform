@@ -32,6 +32,13 @@ namespace NotesApplication.Interfaces
         public Task DeleteNoteAsync(Guid id);
 
         /// <summary>
+        /// Deletes notes list
+        /// </summary>
+        /// <param name="ids">Notes ids</param>
+        /// <returns>None</returns>
+        public Task DeleteNotesListAsync(IEnumerable<Guid> ids);
+
+        /// <summary>
         /// Get note by id
         /// </summary>
         /// <param name="id">Note id</param>

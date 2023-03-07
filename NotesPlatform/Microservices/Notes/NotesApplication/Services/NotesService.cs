@@ -83,6 +83,30 @@ namespace NotesApplication.Services
             }
         }
 
+        public async Task DeleteNotesListAsync(Guid[] ids)
+        {
+            try
+            {
+                _logger.Information($"Try to delete list of notes. Count: {ids.Length}");
+
+                var notes = await _notes.Notes.Where(n => ids.Contains(n.Id)).ToListAsync();
+
+                if (notes.Any())
+                {
+                    _notes.Notes.RemoveRange(notes);
+                    await _notes.SaveChangesAsync(CancellationToken.None); 
+                }
+
+                _logger.Information($"Notes deleted: {notes.Count}");
+
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Error occured while list of notes removing.");
+                throw;
+            }
+        }
+
         public async Task<IEnumerable<Note>> GetNotesListAsync()
         {
             try

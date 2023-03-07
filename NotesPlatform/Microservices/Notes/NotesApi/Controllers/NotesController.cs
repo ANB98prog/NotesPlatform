@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NotesApi.Models;
 using NotesApplication.Interfaces;
+using NotesApplication.Models;
 using NotesDomain;
 
 namespace NotesApi.Controllers
@@ -58,12 +59,13 @@ namespace NotesApi.Controllers
         /// <summary>
         /// Get notes list
         /// </summary>
+        /// <param name="query">Query</param>
         /// <returns>Return list of Note</returns>
         /// <response code="200">Success</response>
         [HttpGet()]
-        public async Task<IEnumerable<Note>> GetNotesList()
+        public async Task<IEnumerable<Note>> GetNotesList([FromQuery] GetNotesListQuery query)
         {
-            return await _notesService.GetNotesListAsync();
+            return await _notesService.GetNotesListAsync(query);
         }
 
         /// <summary>

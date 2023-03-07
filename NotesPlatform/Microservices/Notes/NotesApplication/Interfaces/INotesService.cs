@@ -1,4 +1,5 @@
-﻿using NotesDomain;
+﻿using NotesApplication.Models;
+using NotesDomain;
 
 namespace NotesApplication.Interfaces
 {
@@ -49,6 +50,6 @@ namespace NotesApplication.Interfaces
         /// Gets all notes
         /// </summary>
         /// <returns>List of notes</returns>
-        public Task<IEnumerable<Note>> GetNotesListAsync();
+        public Task<IEnumerable<Note>> GetNotesListAsync(GetNotesListQuery query);
     }
 }

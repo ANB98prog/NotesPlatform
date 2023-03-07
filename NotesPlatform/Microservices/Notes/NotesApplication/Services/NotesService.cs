@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using NotesApplication.Interfaces;
 using NotesDomain;
+using NotesApplication.Models;
 
 namespace NotesApplication.Services
 {
@@ -107,13 +108,19 @@ namespace NotesApplication.Services
             }
         }
 
-        public async Task<IEnumerable<Note>> GetNotesListAsync()
+        public async Task<IEnumerable<Note>> GetNotesListAsync(GetNotesListQuery query)
         {
             try
             {
                 _logger.Information($"Try to get list notes.");
 
-                var notes = await _notes.Notes.ToListAsync();
+                var from = query.PageNumber * query.PageSize;
+                var take = query.PageSize;
+
+                var notes = await _notes.Notes
+                                    .Skip(from)
+                                        .Take(take)
+                                            .ToListAsync();
 
                 _logger.Information($"Notes successfully got. Count {notes.Count}");
 

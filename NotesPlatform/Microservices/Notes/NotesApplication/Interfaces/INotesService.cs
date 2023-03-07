@@ -36,7 +36,7 @@ namespace NotesApplication.Interfaces
         /// </summary>
         /// <param name="ids">Notes ids</param>
         /// <returns>None</returns>
-        public Task DeleteNotesListAsync(IEnumerable<Guid> ids);
+        public Task DeleteNotesListAsync(Guid[] ids);
 
         /// <summary>
         /// Get note by id

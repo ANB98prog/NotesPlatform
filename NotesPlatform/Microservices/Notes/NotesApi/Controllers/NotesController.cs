@@ -29,6 +29,7 @@ namespace NotesApi.Controllers
         /// <summary>
         /// Craetes a new note
         /// </summary>
+        /// <param name="note">Note to create</param>
         /// <returns>Return Note</returns>
         /// <response code="201">Created</response>
         [HttpPost("create")]
@@ -42,6 +43,7 @@ namespace NotesApi.Controllers
         /// <summary>
         /// Get note by id
         /// </summary>
+        /// <param name="id">Note id</param>
         /// <returns>Return Note</returns>
         /// <response code="200">Success</response>
         [HttpGet("{id}")]
@@ -67,6 +69,7 @@ namespace NotesApi.Controllers
         /// <summary>
         /// Removes note by id
         /// </summary>
+        /// <param name="id">Note id</param>
         /// <returns>Returns NoContent</returns>
         /// <response code="204">NoContent</response>
         [HttpDelete("{id}")]
@@ -80,8 +83,26 @@ namespace NotesApi.Controllers
         }
 
         /// <summary>
+        /// Removes notes list
+        /// </summary>
+        /// <param name="ids">Notes ids</param>
+        /// <returns>Returns NoContent</returns>
+        /// <response code="204">NoContent</response>
+        [HttpDelete()]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> DeleteNotesListAsync( [FromBody]Guid[] ids)
+        {
+            await _notesService.DeleteNotesListAsync(ids);
+
+            return NoContent();
+        }
+
+        /// <summary>
         /// Updates note
         /// </summary>
+        /// <param name="id">Note id</param>
+        /// <param name="note">Updated note</param>
         /// <returns>Returns NoContent</returns>
         /// <response code="204">NoContent</response>
         [HttpPatch]

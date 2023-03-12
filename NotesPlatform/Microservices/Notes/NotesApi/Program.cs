@@ -33,6 +33,7 @@ namespace NotesApi
                 app.UseSwaggerUI();
             }
 
+            app.UseCors("AllowAll");
             app.UseCustomExceptionHandler();
 
             app.UseAuthorization();
@@ -49,6 +50,16 @@ namespace NotesApi
                .MinimumLevel.Override("Microsoft.EntityFrameworkCore.Database.Command", Serilog.Events.LogEventLevel.Error)
                .WriteTo.File(Path.Combine("Logs","NotesApiLog-.txt"), rollingInterval: RollingInterval.Day)
                .CreateLogger();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                    policy.AllowAnyOrigin();
+                });
+            });
 
             services.AddPersistence(configuration);
 

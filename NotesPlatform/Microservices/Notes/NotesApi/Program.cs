@@ -14,7 +14,7 @@ namespace NotesApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            ConfigureAppServices(builder.Services, builder.Configuration);
+            ConfigureAppServices(builder.Services, builder.Configuration, builder.Environment);
 
             builder.Services.AddRouting(options => options.LowercaseUrls = true);
             builder.Services.AddControllers();
@@ -43,7 +43,7 @@ namespace NotesApi
             app.Run();
         }
 
-        private static void ConfigureAppServices(IServiceCollection services, IConfiguration configuration)
+        private static void ConfigureAppServices(IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
         {
             Log.Logger = new LoggerConfiguration()
                .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Information)
@@ -61,7 +61,7 @@ namespace NotesApi
                 });
             });
 
-            services.AddPersistence(configuration);
+            services.AddPersistence(configuration, environment.IsDevelopment());
 
             services.AddSingleton<ILogger>(Log.Logger);
 

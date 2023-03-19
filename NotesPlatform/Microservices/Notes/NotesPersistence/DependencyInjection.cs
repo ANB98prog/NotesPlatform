@@ -8,14 +8,25 @@ namespace NotesPersistence
     public static class DependencyInjection
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services,
-           IConfiguration configuration)
+           IConfiguration configuration, bool isDevelopment = false)
         {
             var connectionString = configuration["DbConnection"];
-            services.AddEntityFrameworkNpgsql()
+
+            if (isDevelopment)
+            {
+                services.AddDbContext<NotesDbContext>(options =>
+                {
+                    options.UseSqlite(connectionString);
+                });
+            }
+            else
+            {
+                services.AddEntityFrameworkNpgsql()
                 .AddDbContext<NotesDbContext>(options =>
                 {
                     options.UseNpgsql(connectionString);
                 });
+            }            
 
             services.AddTransient<INotesDbContext>(s => s.GetRequiredService<NotesDbContext>());
 

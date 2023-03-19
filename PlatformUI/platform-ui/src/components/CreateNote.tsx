@@ -3,7 +3,12 @@ import React, { useState } from 'react'
 import { ICreateNoteRequest, INote } from '../data/models';
 import { ErrorMessage } from './ErrorMessage';
 
-export function CreateNote() {
+interface ICreateNoteProps {
+    onCreate: (note: INote) => void
+}
+
+
+export function CreateNote({ onCreate } : ICreateNoteProps) {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [titleError, setTitleError] = useState("");
@@ -41,8 +46,9 @@ const submitHandler = async (event: React.FormEvent) => {
     noteDataRequest.title = title;
     noteDataRequest.content = content;
 
-    const response = await axios.post<ICreateNoteRequest, INote>("http://localhost:5279/api/notes/create", noteDataRequest);
+    const response = await axios.post<INote>("http://localhost:5279/api/notes/create", noteDataRequest);
     
+    onCreate(response.data);
 }
 
 return (

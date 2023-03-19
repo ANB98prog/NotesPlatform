@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { INote } from '../data/models'
 
 interface INoteProps {

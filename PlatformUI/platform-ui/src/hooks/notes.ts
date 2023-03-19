@@ -2,10 +2,14 @@ import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { INote } from "../data/models";
 
-export function useProducts() {
+export function useNotes() {
     const [notes, setNotes] = useState<INote[]>([])
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+
+    function addNote(note: INote) {
+        setNotes(prev => [...notes, note]);
+    }
 
     async function fetchNotes() {
         try {
@@ -25,5 +29,5 @@ export function useProducts() {
         fetchNotes();
     }, [])
 
-    return { notes, loading, error };
+    return { notes, loading, error, addNote };
 }

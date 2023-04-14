@@ -11,6 +11,14 @@ export function useNotes() {
         setNotes(prev => [...notes, note]);
     }
 
+    function deleteNote(note: INote) {
+        var index = notes.indexOf(note);
+        if(index >= 0){
+            notes.splice(index, 1);
+            setNotes(prev => [...notes]); 
+        }
+    }
+
     async function fetchNotes() {
         try {
             setError('');
@@ -29,5 +37,5 @@ export function useNotes() {
         fetchNotes();
     }, [])
 
-    return { notes, loading, error, addNote };
+    return { notes, loading, error, addNote, deleteNote };
 }

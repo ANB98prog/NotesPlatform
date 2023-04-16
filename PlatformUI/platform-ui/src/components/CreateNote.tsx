@@ -46,7 +46,7 @@ const submitHandler = async (event: React.FormEvent) => {
     noteDataRequest.title = title;
     noteDataRequest.content = content;
 
-    const response = await axios.post<INote>("http://localhost:5279/api/notes/create", noteDataRequest);
+    const response = await axios.post<INote>("http://localhost:5222/api/notes/create", noteDataRequest);
     
     onCreate(response.data);
 }

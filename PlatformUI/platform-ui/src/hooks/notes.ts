@@ -23,7 +23,7 @@ export function useNotes() {
         try {
             setError('');
             setLoading(true);
-            const response = await axios.get<INote[]>("http://localhost:5279/api/notes");
+            const response = await axios.get<INote[]>("http://localhost:5222/api/notes");
             setNotes(response.data);
             setLoading(false);
         } catch (e: unknown) {

@@ -10,7 +10,7 @@ interface INoteProps {
 export function Note({note, onDelete}: INoteProps) {
 
   const deleteNoteHandler = async () => {
-    const response = await axios.delete("http://localhost:5279/api/notes/" + note.id);
+    const response = await axios.delete("http://localhost:5222/api/notes/" + note.id);
     onDelete(note);
   }
 
